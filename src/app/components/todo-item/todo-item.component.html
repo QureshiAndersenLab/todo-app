@@ -1,0 +1,13 @@
+<li>
+  <input
+    type="checkbox"
+    name="todo"
+    [checked]="todo.completed"
+    (click)="markComplete(todo.id)"
+  />
+  <p>
+    {{ todo.task }}
+  </p>
+
+  <button (click)="deleteTask(todo.id)">Delete</button>
+</li>

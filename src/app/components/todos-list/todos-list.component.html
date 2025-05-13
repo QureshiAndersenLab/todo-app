@@ -1,0 +1,6 @@
+<ul>
+  <app-todo-item
+    *ngFor="let todo of todos$ | async"
+    [todo]="todo"
+  ></app-todo-item>
+</ul>
