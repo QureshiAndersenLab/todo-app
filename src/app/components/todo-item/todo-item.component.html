@@ -3,11 +3,17 @@
     type="checkbox"
     name="todo"
     [checked]="todo.completed"
-    (click)="markComplete(todo.id)"
+    (change)="markComplete(todo.id)"
   />
   <p>
     {{ todo.task }}
   </p>
 
-  <button (click)="deleteTask(todo.id)">Delete</button>
+  <app-button [isPrimary]="true" (handleClick)="handleEdit(todo.id)">
+    Edit
+  </app-button>
+
+  <app-button [isPrimary]="false" (handleClick)="deleteTask(todo.id)">
+    Delete
+  </app-button>
 </li>

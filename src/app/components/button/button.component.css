@@ -1,0 +1,23 @@
+button {
+  text-decoration: none;
+  padding: 4px 8px;
+  margin: 4px;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+
+button:hover {
+  color: gray;
+  border: 1px solid gray;
+}
+
+.primary {
+  color: blue;
+  border: 1px solid blue;
+}
+
+.secondary {
+  color: red;
+  border: 1px solid red;
+}
