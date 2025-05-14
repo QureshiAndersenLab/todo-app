@@ -30,7 +30,7 @@ export class TodosService {
   }
 
   editTask(todo: Todo): Observable<Todo> {
-    return this._http.put<Todo>(this.baseUrl, todo);
+    return this._http.put<any>(this.baseUrl, todo);
   }
 
   deleteTask(id: number): Observable<Todo> {

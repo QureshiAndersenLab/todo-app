@@ -5,16 +5,24 @@ import { Router, RouterModule } from '@angular/router';
 import { Todo } from '@models/todo.model';
 import { TodosService } from '@services/todos.service';
 import { ButtonComponent } from '../button/button.component';
+import { DisplayErrorComponent } from '../display-error/display-error.component';
 
 @Component({
   selector: 'app-todo-item',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, ButtonComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ButtonComponent,
+    DisplayErrorComponent,
+  ],
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.css',
 })
 export class TodoItemComponent {
   @Input() todo!: Todo;
+  errorMessage!: string;
 
   @Output() refetchTodos = new EventEmitter<void>();
 
@@ -28,7 +36,13 @@ export class TodoItemComponent {
   }
 
   deleteTask(id: number): void {
-    this._todoService.deleteTask(id).subscribe((_) => this.refetchTodos.emit());
+    this._todoService.deleteTask(id).subscribe({
+      next: (_) => this.refetchTodos.emit(),
+      error: (err) => {
+        console.error('Error deleting todos:', err);
+        this.errorMessage = `Failed deleting ${this.todo.task}: ${err.body.error}`;
+      },
+    });
   }
 
   handleEdit(id: number): void {

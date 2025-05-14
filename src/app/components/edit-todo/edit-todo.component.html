@@ -19,6 +19,10 @@
         />
         <app-button [isPrimary]="true">Update task</app-button>
       </form>
+
+      <ng-container *ngIf="errorMessage">
+        <app-display-error [message]="errorMessage" />
+      </ng-container>
     </div>
   </div>
 </ng-template>

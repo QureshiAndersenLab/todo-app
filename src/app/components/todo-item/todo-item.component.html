@@ -1,3 +1,7 @@
+<ng-container *ngIf="errorMessage">
+  <app-display-error [message]="errorMessage" />
+</ng-container>
+
 <li>
   <input
     type="checkbox"
