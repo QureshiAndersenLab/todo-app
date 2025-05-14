@@ -24,3 +24,9 @@ button {
   padding: 4px 8px;
   cursor: pointer;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

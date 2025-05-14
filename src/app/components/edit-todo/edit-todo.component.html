@@ -1,18 +1,24 @@
-<div class="container">
-  <button (click)="goBack()">Back</button>
+<ng-container *ngIf="loading; else todo_container">
+  <div class="loading">Loading...</div>
+</ng-container>
 
-  <div>
-    <h2>Todo Task: {{ todo.task }}</h2>
+<ng-template #todo_container>
+  <div class="container">
+    <button (click)="goBack()">Back</button>
 
-    <form (ngSubmit)="updateTodo(todo_task.value)">
-      <label>Update Task:</label>
-      <input
-        #todo_task
-        type="text"
-        value="{{ todo.task }}"
-        placeholder="{{ todo.task }}"
-      />
-      <app-button [isPrimary]="true">Update task</app-button>
-    </form>
+    <div>
+      <h2>Todo Task: {{ todo.task }}</h2>
+
+      <form (ngSubmit)="updateTodo(todo_task.value)">
+        <label>Update Task:</label>
+        <input
+          #todo_task
+          type="text"
+          value="{{ todo.task }}"
+          placeholder="{{ todo.task }}"
+        />
+        <app-button [isPrimary]="true">Update task</app-button>
+      </form>
+    </div>
   </div>
-</div>
+</ng-template>

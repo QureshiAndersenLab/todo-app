@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TodoCreateComponent } from '@components/todo-create/todo-create.component';
 import { TodosListComponent } from '@components/todos-list/todos-list.component';
 
@@ -9,4 +9,10 @@ import { TodosListComponent } from '@components/todos-list/todos-list.component'
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.css',
 })
-export class TodosComponent {}
+export class TodosComponent {
+  @ViewChild('todoList') todoListComponent!: TodosListComponent;
+
+  refetchTodos(): void {
+    this.todoListComponent.getTodos();
+  }
+}

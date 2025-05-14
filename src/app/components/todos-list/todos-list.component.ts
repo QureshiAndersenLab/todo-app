@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { TodosService } from '@services/todos.service';
 import { CommonModule } from '@angular/common';
 import { TodoItemComponent } from '@components/todo-item/todo-item.component';
+import { Todo } from '@models/todo.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todos-list',
@@ -10,8 +12,18 @@ import { TodoItemComponent } from '@components/todo-item/todo-item.component';
   templateUrl: './todos-list.component.html',
   styleUrl: './todos-list.component.css',
 })
-export class TodosListComponent {
-  todos$ = this.todosService.todos$;
+export class TodosListComponent implements OnInit {
+  todos!: Todo[];
 
-  constructor(private todosService: TodosService) {}
+  constructor(private _todosService: TodosService) {}
+
+  ngOnInit(): void {
+    this.getTodos();
+  }
+
+  getTodos(): void {
+    this._todosService.getTodos().subscribe((todos) => {
+      this.todos = todos;
+    });
+  }
 }

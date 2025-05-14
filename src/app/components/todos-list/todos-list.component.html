@@ -1,6 +1,7 @@
 <ul>
   <app-todo-item
-    *ngFor="let todo of todos$ | async"
+    *ngFor="let todo of todos"
     [todo]="todo"
+    (refetchTodos)="getTodos()"
   ></app-todo-item>
 </ul>

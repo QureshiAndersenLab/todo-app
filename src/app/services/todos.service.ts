@@ -1,44 +1,39 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '@models/todo.model';
-import { BehaviorSubject, filter } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
-  private todosSubject$ = new BehaviorSubject<Todo[]>([]);
-  todos$ = this.todosSubject$.asObservable();
+  private baseUrl = 'api/todos';
 
-  private _idCounter = 0;
+  constructor(private _http: HttpClient) {}
 
-  addTodo(task: string): void {
-    const newTodo: Todo = { id: ++this._idCounter, task, completed: false };
-    this.todosSubject$.next([...this.todosSubject$.value, newTodo]);
+  getTodos(): Observable<Todo[]> {
+    return this._http.get<Todo[]>(this.baseUrl);
   }
 
-  markComplete(id: number): void {
-    const newTodos = this.todosSubject$.value.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-
-    this.todosSubject$.next(newTodos);
+  getTodo(id: number): Observable<Todo> {
+    return this._http.get<Todo>(`${this.baseUrl}/${id}`);
   }
 
-  getTodo(id: number): Todo {
-    return this.todosSubject$.value.find((todo) => todo.id === id)!;
+  addTodo(todo: Todo): Observable<Todo> {
+    return this._http
+      .post<Todo>(this.baseUrl, todo)
+      .pipe(tap((_) => console.log('Todo added')));
   }
 
-  editTask(todo: Todo): void {
-    const newTodos = this.todosSubject$.value.map((curTodo) =>
-      curTodo.id === todo.id ? todo : curTodo
-    );
-
-    this.todosSubject$.next(newTodos);
+  markComplete(todo: Todo): Observable<Todo> {
+    return this._http.put<Todo>(`${this.baseUrl}/${todo.id}`, todo);
   }
 
-  deleteTask(id: number): void {
-    const newTodos = this.todosSubject$.value.filter((todo) => todo.id !== id);
+  editTask(todo: Todo): Observable<Todo> {
+    return this._http.put<Todo>(this.baseUrl, todo);
+  }
 
-    this.todosSubject$.next(newTodos);
+  deleteTask(id: number): Observable<Todo> {
+    return this._http.delete<Todo>(`${this.baseUrl}/${id}`);
   }
 }

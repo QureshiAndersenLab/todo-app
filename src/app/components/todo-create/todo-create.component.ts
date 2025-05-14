@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TodosService } from '@services/todos.service';
 import { ButtonComponent } from '../button/button.component';
+import { Todo } from '@models/todo.model';
 
 @Component({
   selector: 'app-todo-create',
@@ -13,11 +14,19 @@ import { ButtonComponent } from '../button/button.component';
 export class TodoCreateComponent {
   todo: string = '';
 
-  constructor(private todosService: TodosService) {}
+  constructor(private _todosService: TodosService) {}
+
+  @Output() todoCreated = new EventEmitter<void>();
 
   addTodo(): void {
-    if (this.todo === '') return;
-    this.todosService.addTodo(this.todo);
-    this.todo = '';
+    this.todo = this.todo.trim();
+    if (!this.todo) return;
+
+    const newTodo: Todo = { task: this.todo, completed: false } as Todo;
+
+    this._todosService.addTodo(newTodo).subscribe((_) => {
+      this.todo = '';
+      this.todoCreated.emit();
+    });
   }
 }

@@ -1,2 +1,2 @@
-<app-todo-create></app-todo-create>
-<app-todos-list></app-todos-list>
+<app-todo-create (todoCreated)="refetchTodos()"></app-todo-create>
+<app-todos-list #todoList></app-todos-list>

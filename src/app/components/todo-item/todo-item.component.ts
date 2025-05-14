@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Todo } from '@models/todo.model';
@@ -16,14 +16,19 @@ import { ButtonComponent } from '../button/button.component';
 export class TodoItemComponent {
   @Input() todo!: Todo;
 
-  constructor(private todoService: TodosService, private _router: Router) {}
+  @Output() refetchTodos = new EventEmitter<void>();
 
-  markComplete(id: number): void {
-    this.todoService.markComplete(id);
+  constructor(private _todoService: TodosService, private _router: Router) {}
+
+  markComplete(): void {
+    const newTodo = { ...this.todo, completed: !this.todo.completed };
+    this._todoService
+      .markComplete(newTodo)
+      .subscribe((_) => this.refetchTodos.emit());
   }
 
   deleteTask(id: number): void {
-    this.todoService.deleteTask(id);
+    this._todoService.deleteTask(id).subscribe((_) => this.refetchTodos.emit());
   }
 
   handleEdit(id: number): void {

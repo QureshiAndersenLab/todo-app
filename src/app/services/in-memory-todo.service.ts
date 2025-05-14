@@ -5,15 +5,16 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 @Injectable({
   providedIn: 'root',
 })
-export class InMemoryTodoService {
+export class InMemoryTodoService implements InMemoryDbService {
   constructor() {}
 
   createDb() {
-    const todos = [{}];
+    const todos: Todo[] = [];
+
     return { todos };
   }
 
   genId(todos: Todo[]): number {
-    return todos.length > 0 ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1;
+    return todos.length ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1;
   }
 }
