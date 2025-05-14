@@ -1,1 +1,18 @@
-<p>edit-todo works!</p>
+<div class="container">
+  <button (click)="goBack()">Back</button>
+
+  <div>
+    <h2>Todo Task: {{ todo.task }}</h2>
+
+    <form (ngSubmit)="updateTodo(todo_task.value)">
+      <label>Update Task:</label>
+      <input
+        #todo_task
+        type="text"
+        value="{{ todo.task }}"
+        placeholder="{{ todo.task }}"
+      />
+      <app-button [isPrimary]="true">Update task</app-button>
+    </form>
+  </div>
+</div>

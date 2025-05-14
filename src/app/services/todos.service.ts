@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '@models/todo.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,11 +24,17 @@ export class TodosService {
     this.todosSubject$.next(newTodos);
   }
 
-  // editTask(id: number): void {
-  //   const newTodos = this.todosSubject$.value.filter((todo) => todo.id !== id);
+  getTodo(id: number): Todo {
+    return this.todosSubject$.value.find((todo) => todo.id === id)!;
+  }
 
-  //   this.todosSubject$.next(newTodos);
-  // }
+  editTask(todo: Todo): void {
+    const newTodos = this.todosSubject$.value.map((curTodo) =>
+      curTodo.id === todo.id ? todo : curTodo
+    );
+
+    this.todosSubject$.next(newTodos);
+  }
 
   deleteTask(id: number): void {
     const newTodos = this.todosSubject$.value.filter((todo) => todo.id !== id);
