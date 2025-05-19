@@ -1,6 +1,30 @@
-* {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
+.app-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+.app-foreground {
+  color: white;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.app-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
 }

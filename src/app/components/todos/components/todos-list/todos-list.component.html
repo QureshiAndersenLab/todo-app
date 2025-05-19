@@ -2,10 +2,16 @@
   <app-display-error [message]="errorMessage" />
 </ng-container>
 
-<ul>
+<div *ngIf="!todos.length">No Todos to display!</div>
+
+<flex-container
+  direction="column"
+  align="center"
+  [customStyles]="{ gap: '5px', margin: '4px', padding: '4px' }"
+>
   <app-todo-item
     *ngFor="let todo of todos"
     [todo]="todo"
     (refetchTodos)="getTodos()"
   ></app-todo-item>
-</ul>
+</flex-container>

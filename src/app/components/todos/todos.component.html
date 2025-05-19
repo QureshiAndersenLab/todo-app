@@ -1,2 +1,29 @@
-<app-todo-create (todoCreated)="refetchTodos()"></app-todo-create>
-<app-todos-list #todoList></app-todos-list>
+<flex-container
+  direction="column"
+  align="center"
+  [customStyles]="{ gap: '16px' }"
+>
+  <flex-container
+    align="center"
+    justify="between"
+    [customStyles]="{ gap: '10px', padding: '15px' }"
+    class="todo-count"
+  >
+    <flex-container
+      direction="column"
+      align="start"
+      [customStyles]="{ padding: '10px' }"
+    >
+      <p class="done">Todo's Done</p>
+      <p class="sub-title">Keep it up!</p>
+    </flex-container>
+
+    <p class="count">{{ completedTodos }} / {{ totalTodos }}</p>
+  </flex-container>
+
+  <app-todos-list></app-todos-list>
+
+  <button class="create-btn" (click)="openCreateModal()">
+    <i class="fa-solid fa-plus" [ngStyle]="{ 'font-size': '16px' }"></i>
+  </button>
+</flex-container>

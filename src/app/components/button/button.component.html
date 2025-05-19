@@ -1,6 +1,3 @@
-<button
-  (click)="buttonClicked()"
-  [ngClass]="isPrimary ? 'primary' : 'secondary'"
->
+<button (click)="buttonClicked()" [ngStyle]="customStyles">
   <ng-content></ng-content>
 </button>

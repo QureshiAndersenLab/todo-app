@@ -1,0 +1,18 @@
+<app-modal [modalID]="createTodoID">
+  <div class="create-container">
+    <p heading>Create a TODO</p>
+    <form (ngSubmit)="addTodo()">
+      <input
+        type="text"
+        name="todo"
+        [(ngModel)]="todo"
+        placeholder="Add a todo task"
+        appFocus
+      />
+
+      <app-button>
+        <i class="fa-solid fa-plus" [ngStyle]="{ 'font-size': '16px' }"></i>
+      </app-button>
+    </form>
+  </div>
+</app-modal>

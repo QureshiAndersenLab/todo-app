@@ -1,0 +1,22 @@
+span {
+  color: red;
+  font-size: large;
+}
+
+p {
+  min-width: 100px;
+  font-size: 18px;
+  text-align: start;
+  padding: 5px;
+  margin: 2px 4px;
+}
+
+.edit i {
+  color: rgb(62, 129, 200);
+  font-size: 15px;
+}
+
+.delete i {
+  color: red;
+  font-size: 15px;
+}

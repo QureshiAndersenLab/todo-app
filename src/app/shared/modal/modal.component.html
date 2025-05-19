@@ -1,0 +1,20 @@
+<div
+  id="modal"
+  class="modal-container"
+  [ngClass]="{ open: modal.isModalOpen(modalID) }"
+>
+  <div class="modal-flex-wrapper">
+    <div class="modal-bg-overlay" (click)="closeModal()">
+      <div class="bg"></div>
+    </div>
+
+    <span class="modal-centering-span">&#8203;</span>
+
+    <div class="modal-dialog">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-close" (click)="closeModal()">&#x2715;</div>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

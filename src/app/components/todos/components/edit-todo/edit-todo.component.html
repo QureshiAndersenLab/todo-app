@@ -3,26 +3,31 @@
 </ng-container>
 
 <ng-template #todo_container>
-  <div class="container">
+  <flex-container
+    direction="column"
+    align="center"
+    [customStyles]="{ gap: '10px' }"
+  >
     <button (click)="goBack()">Back</button>
 
-    <div>
+    <flex-container direction="column" [customStyles]="{ gap: '5px' }">
       <h2>Todo Task: {{ todo.task }}</h2>
 
       <form (ngSubmit)="updateTodo(todo_task.value)">
-        <label>Update Task:</label>
         <input
           #todo_task
           type="text"
           value="{{ todo.task }}"
           placeholder="{{ todo.task }}"
+          appFocus
         />
-        <app-button [isPrimary]="true">Update task</app-button>
+
+        <button>Update Task</button>
       </form>
 
       <ng-container *ngIf="errorMessage">
         <app-display-error [message]="errorMessage" />
       </ng-container>
-    </div>
-  </div>
+    </flex-container>
+  </flex-container>
 </ng-template>

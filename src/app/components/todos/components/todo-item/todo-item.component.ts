@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Todo } from '@models/todo.model';
 import { TodosService } from '@services/todos.service';
-import { ButtonComponent } from '../button/button.component';
-import { DisplayErrorComponent } from '../display-error/display-error.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { DisplayErrorComponent } from '@components/display-error/display-error.component';
+import { FlexContainerComponent } from '@components/flex-container/flex-container.component';
 
 @Component({
   selector: 'app-todo-item',
@@ -16,6 +17,7 @@ import { DisplayErrorComponent } from '../display-error/display-error.component'
     RouterModule,
     ButtonComponent,
     DisplayErrorComponent,
+    FlexContainerComponent,
   ],
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.css',

@@ -1,4 +1,45 @@
-* {
+.create-todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-count {
+  border-radius: 5px;
+  border: gray 1px solid;
+}
+
+.done {
+  font-size: 28px;
+}
+.sub-title {
+  font-size: 16px;
+  color: lightgray;
+  font-weight: 300;
+}
+
+.count {
+  padding: 10px;
+  font-size: 18px;
+}
+
+form {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin: 0px 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid white;
+  font-size: 16px;
+  background-color: transparent;
+  color: white;
+}
+
+.create-btn {
+  padding: 7px;
+  border-radius: 30px;
 }

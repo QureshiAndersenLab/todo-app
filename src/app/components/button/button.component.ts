@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
-  @Input() isPrimary!: boolean;
+  @Input() customStyles: { [key: string]: string } = {};
 
   @Output() handleClick = new EventEmitter<void>();
 

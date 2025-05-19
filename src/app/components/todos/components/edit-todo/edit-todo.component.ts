@@ -3,14 +3,21 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Todo } from '@models/todo.model';
 import { TodosService } from '@services/todos.service';
-import { ButtonComponent } from '../button/button.component';
 import { CommonModule } from '@angular/common';
-import { DisplayErrorComponent } from '../display-error/display-error.component';
+import { DisplayErrorComponent } from '@components/display-error/display-error.component';
+import { FocusDirective } from 'app/shared/focus.directive';
+import { FlexContainerComponent } from '../../../flex-container/flex-container.component';
 
 @Component({
   selector: 'app-edit-todo',
   standalone: true,
-  imports: [FormsModule, ButtonComponent, CommonModule, DisplayErrorComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    DisplayErrorComponent,
+    FocusDirective,
+    FlexContainerComponent,
+  ],
   templateUrl: './edit-todo.component.html',
   styleUrl: './edit-todo.component.css',
 })
@@ -38,6 +45,7 @@ export class EditTodoComponent implements OnInit {
     this.todo.task = task;
     this._todosService.editTask(this.todo).subscribe({
       next: () => {
+        this._todosService.notifyTodosUpdated();
         this._router.navigate(['']);
       },
       error: (err) => {
